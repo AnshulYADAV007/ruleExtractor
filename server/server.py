@@ -10,23 +10,19 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-system_messages_1 = {"droolDev": 'You are a Drools Developer',
-                     "analyst": 'You are a Servicing Compliance Analyst'}
+system_messages_1 = 'You are a Servicing Compliance Analyst'
 
 
 @app.route('/', methods=['POST'])
 def result():
     print(request.data)
-    system_message_2 = "Extract rules in a tabular format with following columns:"
+    system_message_2 = "Extract rules in a tabular format with 4 columns - name, text snippet, extracted rule and a due date by which the action must be completed."
     data = json.loads(request.data)
-    for element in data["columns"][:-1]:
-        system_message_2 += " " + element + ","
-    system_message_2 += " " + data["columns"][-1]
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system",
-                "content": system_messages_1[data["role"]]},
+                "content": system_messages_1},
             {"role": "assistant", "content": "Sure"},
             {"role": "user", "content": "I will provide you with a text and you have to extract rules that can be programmed to identify either loans that do not meet the guidelines, or an activity to be performed by the servicer to ensure compliance with the guidelines."},
             {"role": "system", "content": system_message_2},

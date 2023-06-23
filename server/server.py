@@ -16,7 +16,7 @@ system_messages_1 = 'You are a Servicing Compliance Analyst'
 @app.route('/', methods=['POST'])
 def result():
     print(request.data)
-    system_message_2 = "Extract rules in a tabular format with 4 columns - name, text snippet, extracted rule and a due date by which the action must be completed."
+    system_message_2 = "Extract rules in a tabular format with 3 columns - name, text snippet, and extracted rule from the text provided."
     data = json.loads(request.data)
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",

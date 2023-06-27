@@ -1,7 +1,6 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
 
@@ -21,16 +20,10 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+textarea{
+  width: 80%;
+}
 
-  #app {
-    display: flex;
-    flex-direction: column;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+form {
+  width: 90%;
 }

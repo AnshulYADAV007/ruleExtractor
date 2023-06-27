@@ -2,17 +2,16 @@
   <div>
     <h1>Rule Extractor</h1>
     <br />
-    <div>
-      <form id="ruleForm" v-on:submit.prevent="onSubmit">
-        <p>Provide the text for the Compliance</p>
-        <textarea v-model="text" form="ruleForm" rows="20" cols="40" placeholder="Provide the text here"></textarea>
-        <br />
-        <input type="submit" value="Generate Rules">
-        <button style="margin: 1rem;" @click="exportCSV">Download Rules</button>
-        <p v-if="loading" class="loader">
-        </p>
-      </form>
-    </div>
+    <form id="ruleForm" v-on:submit.prevent="onSubmit">
+      <p>Provide the text for the Compliance</p>
+      <textarea v-model="text" form="ruleForm" rows="20" cols="40" placeholder="Provide the text here"></textarea>
+      <br />
+      <input type="submit" value="Generate Rules">
+      <button style="margin: 1rem;" @click.prevent="exportCSV">Download Rules</button>
+      <button @click.prevent="clear">Clear</button>
+      <p v-if="loading" class="loader">
+      </p>
+    </form>
     <br />
   </div>
   <div id="table" v-html="table">
@@ -32,11 +31,16 @@ export default {
     }
   },
   methods: {
+    clear() {
+      this.table = ""
+      this.text = ""
+    },
     async onSubmit() {
       let data = {
         text: this.text
       }
       this.loading = true
+      this.table = ""
       let response = await axios.post('http://127.0.0.1:5000/', data)
       this.loading = false
       this.table = response.data

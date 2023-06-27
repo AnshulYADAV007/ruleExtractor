@@ -34,6 +34,7 @@ export default {
     clear() {
       this.table = ""
       this.text = ""
+      this.loading = false
     },
     async onSubmit() {
       let data = {
@@ -41,9 +42,15 @@ export default {
       }
       this.loading = true
       this.table = ""
-      let response = await axios.post('http://127.0.0.1:5000/', data)
-      this.loading = false
-      this.table = response.data
+      try {
+        let response = await axios.post('http://127.0.0.1:5000/', data)
+        this.loading = false
+        this.table = response.data
+      } catch (e) {
+        this.loading = false
+        this.table = ""
+        console.error(e)
+      }
     },
     exportCSV() {
       let csv = []

@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import axios from 'axios'
-import '../node_modules/file-saver/src/FileSaver.js'
+import FileSaver from 'file-saver'
 
 export default {
   data() {
@@ -57,10 +57,10 @@ export default {
       const rows = document.querySelectorAll("table tr")
       for (const row of rows.values()) {
         const cells = row.querySelectorAll("td, th")
-        csv.push(Array.from(cells).map(cell => '"' + cell.innerText + '"').join(","))
+        csv.push(Array.from(cells).map(cell => '"' + (cell as HTMLElement).innerText + '"').join(","))
       }
       const csvFile = new Blob([csv.join("\n")], { type: 'text/csv; charset=utf-8' })
-      saveAs(csvFile, "data.csv")
+      FileSaver.saveAs(csvFile, "data.csv")
     }
   }
 }

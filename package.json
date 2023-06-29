@@ -12,6 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@types/file-saver": "^2.0.5",
     "axios": "^1.4.0",
     "file-saver": "^2.0.5",
     "vue": "^3.3.4",

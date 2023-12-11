@@ -4,7 +4,7 @@ import openai
 import markdown
 import json
 
-openai.api_key = "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"
+openai.api_key = "XXXXX"
 
 app = Flask(__name__)
 cors = CORS(app)
